@@ -11,9 +11,9 @@ N8N_WEBHOOK = os.environ.get("N8N_WEBHOOK", "https://example.com")
 
 @app.route("/voice", methods=["POST"])
 def voice():
-"""Twilio 来电入口：欢迎语 + 采集语音(暂时不用 MiniMax)"""
+    """Twilio 来电入口：欢迎语 + 采集语音(暂时不用 MiniMax)"""
 
-resp = VoiceResponse()
+    resp = VoiceResponse()
 
 # 欢迎语
 resp.say(
