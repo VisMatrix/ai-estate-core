@@ -12,15 +12,15 @@ N8N_WEBHOOK = os.environ.get("N8N_WEBHOOK", "https://example.com")
 
 @app.route("/voice", methods=["POST"])
 def voice():
-# Twilio 来电入口：欢迎语 + 采集语音（暂时不用 MiniMax）
-resp = VoiceResponse()
+    # Twilio 来电入口：欢迎语 + 采集语音（暂时不用 MiniMax）
+    resp = VoiceResponse()
 
-# 欢迎语
-resp.say(
-"您好，这里是 VisMatrix AI 房产助手。"
-"我会记录您想看的区域和预算，稍后通过微信或短信给您推荐房源。",
-language="zh-CN",
-)
+    # 欢迎语
+    resp.say(
+        "您好，这里是 VisMatrix AI 房产助手。"
+        "我会记录您想看的区域和预算，稍后通过微信或短信给您推荐房源。",
+        language="zh-CN",
+    )
 
 # 收集用户语音
 gather = Gather(
