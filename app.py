@@ -12,33 +12,33 @@ N8N_WEBHOOK = os.environ.get("N8N_WEBHOOK", "https://example.com")
 
 @app.route("/voice", methods=["POST"])
 def voice():
-resp = VoiceResponse()
+    resp = VoiceResponse()
 
-# 欢迎语
-resp.say(
-"您好，这里是 VisMatrix AI 房产助手。",
-language="zh-CN",
-)
-resp.say(
-"我会记录您感兴趣的区域和预算，稍后通过微信或短信给您推荐房源。",
-language="zh-CN",
-)
+    # 欢迎语
+    resp.say(
+        "您好，这里是 VisMatrix AI 房产助手。",
+        language="zh-CN",
+    )
+    resp.say(
+        "我会记录您感兴趣的区域和预算，稍后通过微信或短信给您推荐房源。",
+        language="zh-CN",
+    )
 
-# 收集用户语音
-gather = Gather(
-input="speech",
-action="/handle-speech",
-method="POST",
-speech_timeout="auto",
-language="zh-CN",
-)
-gather.say(
-"现在请您用一句话说出您想要的城市和预算，比如，多伦多一百万预算。",
-language="zh-CN",
-)
-resp.append(gather)
+    # 收集用户语音
+    gather = Gather(
+        input="speech",
+        action="/handle-speech",
+        method="POST",
+        speech_timeout="auto",
+        language="zh-CN",
+    )
+    gather.say(
+    "现在请您用一句话说出您想要的城市和预算，比如，多伦多一百万预算。",
+    language="zh-CN",
+    )
+    resp.append(gather)
 
-return str(resp)
+    return str(resp)
 
 
 @app.route("/handle-speech", methods=["POST"])
