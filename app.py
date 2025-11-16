@@ -33,8 +33,8 @@ def voice():
         language="zh-CN",
     )
     gather.say(
-    "现在请您用一句话说出您想要的城市和预算，比如，多伦多一百万预算。",
-    language="zh-CN",
+        "现在请您用普通话说出您想要的城市和预算，比如，多伦多一百万预算。",
+        language="zh-CN",
     )
     resp.append(gather)
 
@@ -43,32 +43,32 @@ def voice():
 
 @app.route("/handle-speech", methods=["POST"])
 def handle_speech():
-# 暂时不接 AI，只把用户说的内容拿到，然后挂断
-speech = request.form.get("SpeechResult", "").strip()
-from_number = request.form.get("From", "")
+    # 暂时不接 AI，只把用户说的内容拿到，然后挂断
+    speech = request.form.get("SpeechResult", "").strip()
+    from_number = request.form.get("From", "")
 
-print(f"来电号码: {from_number}")
-print(f"用户语音: {speech}")
+    print(f"来电号码: {from_number}")
+    print(f"用户语音: {speech}")
 
-resp = VoiceResponse()
+    resp = VoiceResponse()
 
-if not speech:
-resp.say(
-"不好意思，我没有听清楚，我们下次再联系。",
-language="zh-CN",
-)
-resp.hangup()
-return str(resp)
+    if not speech:
+        resp.say(
+            "不好意思，我没有听清楚，我们下次再联系。",
+            language="zh-CN",
+        )
+        resp.hangup()
+        return str(resp)
 
-# TODO: 之后可以把 speech 和 from_number 发到 n8n / MiniMax 等外部服务
-resp.say(
-"好的，我已经记录下来，稍后会通过微信或短信联系您。",
-language="zh-CN",
-)
-resp.hangup()
-return str(resp)
+    # TODO: 之后可以把 speech 和 from_number 发送到 n8n / MiniMax 等外部服务
+    resp.say(
+        "好的，我已经记录下来，稍后会通过微信或者短信联系您。",
+        language="zh-CN",
+    )
+    resp.hangup()
+    return str(resp)
 
 
 @app.route("/", methods=["GET"])
 def health_check():
-return "OK"
+    return "OK"
